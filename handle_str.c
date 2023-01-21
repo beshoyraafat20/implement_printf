@@ -1,7 +1,7 @@
 #include "main.h"
 /**
  * _str - print string
- * @ap: pointer
+ * @args: pointer
  * Return: number of printed char
  */
 int _str(va_list args)

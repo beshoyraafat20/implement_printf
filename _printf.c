@@ -2,44 +2,57 @@
 #include <stdarg.h>
 
 /**
- * _printf - print output according to a format.
- * @format: is a character string that chose the type.
- * Return: [int] number of characters printed without null by \0
+ * _printf - function that produces output according to a format.
+ * @format: character string.
+ *
+ * Return: the number of characters printed (excluding the null byte used to end
+ * output to strings)
  */
-
 int _printf(const char *format, ...)
 {
-    va_list args;
-    va_start(args, format);
-	int i = 0, count = 0;
-    for (i = 0; format[i] != '\0'; i++) 
-	{
+	va_list args;
+	int count = 0;
+	int i = 0;
 
-        if (format[i] == '%') {
-            if (format[i+1] == 'c') {
-                char c = va_arg(args, int);
-                _putchar(c);
-                count++;
-                i++;
-            } else if (format[i+1] == 's') {
-                char *str = va_arg(args, char *);
-                int j = 0;
-                while (str[j] != '\0') {
-                    _putchar(str[j]);
-                    count++;
-                    j++;
+	va_start(args, format);
+	for (i = 0; format[i] != '\0'; i++)
+	{
+		if (format[i] == '%')
+		{
+			i++;
+			switch(format[i])
+			{
+				case 'c':
+					_putchar(va_arg(args, int));
+					count++;
+				break;
+				case 's':
+				{
+					char *str = va_arg(args, char *);
+					int j = 0;
+
+					while (str[j] != '\0')
+					{
+						_putchar(str[j]);
+						count++;
+						j++;
+					}
+					break;
                 }
-                i++;
-            } else if (format[i+1] == '%') {
-                _putchar('%');
-                count++;
-                i++;
-            }
-        } else {
-            _putchar(format[i]);
-            count++;
-        }
-    }
-    va_end(args);
-    return count;
+    			case '%':
+					_putchar('%');
+					count++;
+					break;
+				default:
+				return (count);
+			}
+		}
+		else
+		{
+			_putchar(format[i]);
+			count++;
+		}
+	}
+	va_end(args);
+	return (count);
 }

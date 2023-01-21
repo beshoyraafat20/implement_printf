@@ -22,17 +22,15 @@ int _printf(const char *format, ...)
 			switch (format[i])
 			{
 				case 'c':
-					_char(args);
-					count++;
-				break;
+					count += _char(args);
+					break;
 				case 's':
 				{
-					_str(args);
+					count += _str(args);
 					break;
 				}
 				case '%':
-					_putchar('%');
-					count++;
+					count += _putchar('%');
 					break;
 				default:
 				return (count);

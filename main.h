@@ -4,3 +4,4 @@ int _putchar(char c);
 int _printf(const char *format, ...);
 int _char(va_list args);
 int _str(va_list args);
+int _int(va_list args);
